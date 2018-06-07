@@ -2,23 +2,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
+    <!--<groupId>org.jenkins-ci.plugins</groupId>-->
+    <!--<artifactId>plugin</artifactId>-->
+    <!--<version>2.3</version>-->
+
     <groupId>org.jenkins-ci.plugins</groupId>
     <artifactId>plugin</artifactId>
-    <!--<version>2.3</version>-->
     <version>3.12</version>
-
+    <relativePath/>
   </parent>
 
   <properties>
     <!--<jenkins.version>1.609.3</jenkins.version>-->
-    <java.level>8</java.level>
-    <!--<no-test-jar>false</no-test-jar>-->
-    <jenkins.version>2.60.3</jenkins.version>
+    <!--<jenkins.version>2.38</jenkins.version>-->
     <!--<hpi-plugin.version>1.115</hpi-plugin.version>-->
-    <hpi-plugin.version>2.5</hpi-plugin.version>
     <!--<jenkins-test-harness.version>${jenkins.version}</jenkins-test-harness.version>-->
-    <jenkins-test-harness.version>2.30</jenkins-test-harness.version>
     <findbugs.failOnError>false</findbugs.failOnError>
+    <jenkins-test-harness.version>2.31</jenkins-test-harness.version>
+
+    <jenkins.version>2.60.3</jenkins.version>
+    <java.level>8</java.level>
+    <workflow-step-api-plugin.version>2.9</workflow-step-api-plugin.version>
+    <workflow-support-plugin.version>2.12</workflow-support-plugin.version>
+    <workflow-cps-plugin.version>2.25</workflow-cps-plugin.version>
+
   </properties>
 
   <artifactId>gitlab-plugin</artifactId>
@@ -154,8 +161,135 @@
   </build>
 
   <dependencies>
-    <!-- Jenkins dependencies -->
 
+    <!-- pipeline dependency-->
+    <!--<dependency>-->
+    <!--<groupId>org.jenkins-ci.plugins</groupId>-->
+    <!--<artifactId>docker-commons</artifactId>-->
+    <!--<version>1.13</version>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jenkins-ci</groupId>
+      <artifactId>annotation-indexer</artifactId>
+      <version>1.11</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>mailer</artifactId>
+      <version>1.16</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>structs</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>junit</artifactId>
+      <version>1.19</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jgit</groupId>
+      <artifactId>org.eclipse.jgit</artifactId>
+      <version>3.7.1.201504261725-r</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.10.8</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- fix dependency-->
+
+
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-cps</artifactId>
+      <version>${workflow-cps-plugin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-durable-task-step</artifactId>
+      <version>2.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-basic-steps</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-api</artifactId>
+      <version>2.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>script-security</artifactId>
+      <version>1.25</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-step-api</artifactId>
+      <version>${workflow-step-api-plugin.version}</version>
+    </dependency>
+    <dependency> <!-- SemaphoreStep -->
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-support</artifactId>
+      <version>${workflow-support-plugin.version}</version>
+    </dependency>
+    <dependency> <!-- StepConfigTester -->
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-step-api</artifactId>
+      <version>${workflow-step-api-plugin.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+    <dependency> <!-- SemaphoreStep -->
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-support</artifactId>
+      <version>${workflow-support-plugin.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-cps</artifactId>
+      <version>${workflow-cps-plugin.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jenkins-ci.plugins.workflow</groupId>
+      <artifactId>workflow-job</artifactId>
+      <version>2.9</version>
+      <scope>test</scope>
+    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>org.jenkins-ci.plugins</groupId>-->
+    <!--<artifactId>credentials-binding</artifactId>-->
+    <!--<version>1.12</version>-->
+    <!--<scope>test</scope>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.jenkins-ci.plugins</groupId>-->
+    <!--<artifactId>config-file-provider</artifactId>-->
+    <!--<version>2.10.1</version>-->
+    <!--<scope>test</scope>-->
+    <!--</dependency>-->
+
+
+    <!-- Jenkins dependencies -->
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>git</artifactId>
@@ -166,44 +300,46 @@
       <artifactId>git-client</artifactId>
       <version>1.19.0</version>
     </dependency>
+    <!--<dependency>-->
+    <!--<groupId>org.jenkins-ci.plugins.workflow</groupId>-->
+    <!--<artifactId>workflow-step-api</artifactId>-->
+    <!--<version>1.15</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--<groupId>org.jenkins-ci.plugins.workflow</groupId>-->
+    <!--<artifactId>workflow-job</artifactId>-->
+    <!--<version>1.15</version>-->
+    <!--</dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/org.jenkins-ci.plugins/subversion -->
     <dependency>
-      <groupId>org.jenkins-ci.plugins.workflow</groupId>
-      <artifactId>workflow-step-api</artifactId>
-      <version>2.9</version>
-      <!--<version>1.15</version>-->
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>subversion</artifactId>
+      <version>2.5.5</version>
     </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.plugins.workflow</groupId>
-      <artifactId>workflow-job</artifactId>
-      <!--<version>1.15</version>-->
-      <version>2.9</version>
-    </dependency>
+
 
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>credentials</artifactId>
-      <!--<version>2.1.0</version>-->
-      <version>2.1.16</version>
+      <version>2.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>plain-credentials</artifactId>
-      <!--<version>1.1</version>-->
-      <version>1.4</version>
+      <version>1.1</version>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.jenkins-ci</groupId>
       <artifactId>symbol-annotation</artifactId>
-      <!--<version>1.5</version>-->
-      <version>1.7</version>
+      <version>1.5</version>
     </dependency>
-    <dependency>
-      <groupId>org.eclipse.jgit</groupId>
-      <artifactId>org.eclipse.jgit</artifactId>
-      <!--<version>3.5.2.201411120430-r</version>-->
-      <version>4.10.0.201712302008-r</version>
-    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>org.eclipse.jgit</groupId>-->
+    <!--<artifactId>org.eclipse.jgit</artifactId>-->
+    <!--<version>3.5.2.201411120430-r</version>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>org.jenkins-ci.plugins</groupId>
       <artifactId>matrix-project</artifactId>
@@ -237,13 +373,11 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.6.5</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <!--<version>4.3.1</version>-->
-      <version>4.5.2</version>
-
-    </dependency>
+    <!--<dependency>-->
+    <!--<groupId>org.apache.httpcomponents</groupId>-->
+    <!--<artifactId>httpclient</artifactId>-->
+    <!--<version>4.3.1</version>-->
+    <!--</dependency>-->
 
     <!-- util dependencies -->
     <dependency>
@@ -259,92 +393,66 @@
     </dependency>
 
     <!-- test dependencies -->
-    <!--<dependency>-->
-    <!--<groupId>junit</groupId>-->
-    <!--<artifactId>junit</artifactId>-->
-    <!--<version>4.12</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.hamcrest</groupId>-->
-    <!--<artifactId>hamcrest-all</artifactId>-->
-    <!--<version>1.3</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.mockito</groupId>-->
-    <!--<artifactId>mockito-all</artifactId>-->
-    <!--<version>1.9.5</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.powermock</groupId>-->
-    <!--<artifactId>powermock-api-mockito</artifactId>-->
-    <!--<version>1.6.1</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.powermock</groupId>-->
-    <!--<artifactId>powermock-module-junit4</artifactId>-->
-    <!--<version>1.6.1</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.mock-server</groupId>-->
-    <!--<artifactId>mockserver-netty</artifactId>-->
-    <!--<version>3.10.2</version>-->
-    <!--<scope>test</scope>-->
-    <!--<exclusions>-->
-    <!--<exclusion>-->
-    <!--<groupId>org.bouncycastle</groupId>-->
-    <!--<artifactId>bcmail-jdk15on</artifactId>-->
-    <!--</exclusion>-->
-    <!--<exclusion>-->
-    <!--<groupId>org.bouncycastle</groupId>-->
-    <!--<artifactId>bcprov-jdk15on</artifactId>-->
-    <!--</exclusion>-->
-    <!--<exclusion>-->
-    <!--<groupId>org.bouncycastle</groupId>-->
-    <!--<artifactId>bcpkix-jdk15on</artifactId>-->
-    <!--</exclusion>-->
-    <!--<exclusion>-->
-    <!--<groupId>javax.servlet</groupId>-->
-    <!--<artifactId>javax.servlet-api</artifactId>-->
-    <!--</exclusion>-->
-    <!--</exclusions>-->
-    <!--</dependency>-->
-    <!--<dependency>-->
-    <!--<groupId>org.postgresql</groupId>-->
-    <!--<artifactId>postgresql</artifactId>-->
-    <!--<version>9.4.1208</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-
-    <!--fix dependencies-->
     <dependency>
-      <groupId>org.jenkins-ci</groupId>
-      <artifactId>annotation-indexer</artifactId>
-      <version>1.11</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
-      <artifactId>structs</artifactId>
-      <version>1.7</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
-      <artifactId>script-security</artifactId>
-      <version>1.21</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jenkins-ci.plugins</groupId>
+      <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>1.19</version>
+      <version>4.12</version>
+      <scope>test</scope>
     </dependency>
-
-    <!--fix dependencies-->
-
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+      <version>1.3</version>
+      <scope>test</scope>
+    </dependency>
+    <!--<dependency>-->
+      <!--<groupId>org.mockito</groupId>-->
+      <!--<artifactId>mockito-all</artifactId>-->
+      <!--<version>1.9.5</version>-->
+      <!--<scope>test</scope>-->
+    <!--</dependency>-->
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito</artifactId>
+      <version>1.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-junit4</artifactId>
+      <version>1.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <version>3.10.2</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcmail-jdk15on</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcprov-jdk15on</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.bouncycastle</groupId>
+          <artifactId>bcpkix-jdk15on</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>javax.servlet-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>9.4.1208</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <profiles>
